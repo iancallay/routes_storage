@@ -1,0 +1,23 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Detalles de la Tarea22</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="task">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>{{ task?.titulo }}</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <p>{{ task?.descripcion }}</p>
+      <ion-badge [color]="task?.estado === 'pendiente' ? 'warning' : 'success'">
+        {{ task?.estado }}
+      </ion-badge>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-button expand="full" color="primary" (click)="editTask()">Editar</ion-button>
+  <ion-button expand="full" color="danger" (click)="deleteTask()">Eliminar</ion-button>
+</ion-content>

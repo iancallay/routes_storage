@@ -1,0 +1,41 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Lista de Tareas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-searchbar debounce="500" placeholder="Buscar libro..." (ionInput)="filterTasks($event)"></ion-searchbar>
+
+  <ion-list>
+    <ion-item *ngFor="let task of tasks; let i = index">
+      <ion-label>
+        <h2>{{ task.titulo }}</h2>
+        <ion-badge [color]="task.estado === 'pendiente' ? 'warning' : 'success'">
+          {{ task.estado }}
+        </ion-badge>
+      </ion-label>
+
+      <ion-button (click)="editTask(task.id)">Ver / Editar Detalles</ion-button>
+
+      <ion-button color="danger" (click)="deleteTask(task.id)">Eliminar</ion-button>
+    </ion-item>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="exit()">
+      <ion-icon name="chevron-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="addTask()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Mensaje cuando no hay resultados -->
+  <div *ngIf="tasks.length === 0" class="no-results">
+    <p>No se encontraron resultados para la búsqueda.</p>
+  </div>
+</ion-content>
